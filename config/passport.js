@@ -12,14 +12,14 @@ const User = {
 
 function findUser (username, callback) {
   if (username === User.username) {
-    return callback(null, user)
+    return callback(null, User)
   }
   return callback(null)
 }
 
 function findUserById (id, callback) {
   if (id === User.id) {
-    return callback(null, user)
+    return callback(null, User)
   }
   return callback(null)
 }
@@ -94,7 +94,7 @@ module.exports = function(passport) {
          // by default, local strategy uses username and password, we will override with email
         usernameField : 'username',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
+        passReqToCallback : false // allows us to pass back the entire request to the callback
 
     }  ,
         function(username, password, done) {
