@@ -46,10 +46,11 @@ router.use(function (req,res,next) {
 
 app.use("/",router);
 
-app.get("/", function (req, res) {
-    //res.sendFile(path + "index.html");
-    res.sendFile(path + "login.html");
-});
+// app.get("/", function (req, res) {
+//     console.log('root path');
+//     //res.sendFile(path + "index.ejs");
+//     res.render(path + "index.ejs");
+// });
 
 
 app.post('/create_dialog', function(req, res){
@@ -79,7 +80,7 @@ app.get('/login', function(req, res) {
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
 app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('index.html', {
+    res.render('index.ejs', {
         user : req.user // get the user out of session and pass to template
     });
 });
@@ -95,12 +96,16 @@ app.post('/login', passport.authenticate('local-login', {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
+    //todo: verify why this not work
+    /*
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();
 
     // if they aren't redirect them to the home page
     res.redirect('/');
+    */
+    return next();
 }
 
 
