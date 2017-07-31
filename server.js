@@ -30,6 +30,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(cookieParser()); // read cookies (needed for auth)
 
 //app.use(express.session({ secret: 'sind' })); // session secret
+app.use(require('express-session')({ secret: 'sind', resave: true, saveUninitialized: true }));
 app.use(passport.initialize())  
 app.use(passport.session())  
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -97,14 +98,14 @@ app.post('/login', passport.authenticate('local-login', {
 function isLoggedIn(req, res, next) {
 
     //todo: verify why this not work
-    /*
+    
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();
 
     // if they aren't redirect them to the home page
     res.redirect('/');
-    */
+    
     return next();
 }
 
